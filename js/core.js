@@ -399,9 +399,15 @@ function createDecor() {
   }
 
   for (let i = 0; i < 34; i++) {
+    let x, y, tries = 0;
+    do {
+      x = 90 + rnd() * (WORLD.w - 180);
+      y = 90 + rnd() * (WORLD.h - 180);
+      tries++;
+    } while (Math.hypot(x - WORLD.w / 2, y - WORLD.h / 2) < 220 && tries < 8);
     crates.push({
-      x: 90 + rnd() * (WORLD.w - 180),
-      y: 90 + rnd() * (WORLD.h - 180),
+      x,
+      y,
       size: 24 + rnd() * 22,
       rot: rnd() * TAU,
       hazard: rnd() > 0.72,
@@ -409,9 +415,15 @@ function createDecor() {
   }
 
   for (let i = 0; i < 26; i++) {
+    let x, y, tries = 0;
+    do {
+      x = 90 + rnd() * (WORLD.w - 180);
+      y = 90 + rnd() * (WORLD.h - 180);
+      tries++;
+    } while (Math.hypot(x - WORLD.w / 2, y - WORLD.h / 2) < 200 && tries < 8);
     barrels.push({
-      x: 90 + rnd() * (WORLD.w - 180),
-      y: 90 + rnd() * (WORLD.h - 180),
+      x,
+      y,
       r: 9 + rnd() * 5,
       color: choose(["#6b4a2a", "#5f6335", "#66503c", "#4f5c52"]),
       rot: rnd() * TAU,

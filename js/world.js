@@ -59,6 +59,7 @@ function updatePlayer(dt) {
 
   player.x = clamp(player.x, 28, WORLD.w - 28);
   player.y = clamp(player.y, 28, WORLD.h - 28);
+  resolveObstacles(player);
 
   const aimX = mouse.x + camera.x - player.x;
   const aimY = mouse.y + camera.y - player.y;
@@ -71,6 +72,31 @@ function updatePlayer(dt) {
   if ((mouse.down || keys[" "]) && player.attackTimer <= 0) {
     tryAttack();
   }
+}
+
+function resolveObstacles(entity) {
+  if (!decor) return;
+  const pushOut = (ox, oy, radius) => {
+    const dx = entity.x - ox;
+    const dy = entity.y - oy;
+    const d = Math.hypot(dx, dy);
+    const minD = radius + entity.radius;
+    if (d > 0.001 && d < minD) {
+      const push = (minD - d) / d;
+      entity.x += dx * push;
+      entity.y += dy * push;
+    } else if (d <= 0.001) {
+      entity.x += minD;
+    }
+  };
+  for (const crate of decor.crates) {
+    pushOut(crate.x, crate.y, crate.size * 0.55);
+  }
+  for (const barrel of decor.barrels) {
+    pushOut(barrel.x, barrel.y, barrel.r);
+  }
+  entity.x = clamp(entity.x, entity.radius + 4, WORLD.w - entity.radius - 4);
+  entity.y = clamp(entity.y, entity.radius + 4, WORLD.h - entity.radius - 4);
 }
 
 function tryAttack() {
@@ -465,6 +491,7 @@ function updateEnemies(dt) {
 
     if (enemy.spawnDelay > 0) {
       enemy.spawnDelay -= dt;
+      resolveObstacles(enemy);
       continue;
     }
 
@@ -514,6 +541,7 @@ function updateEnemies(dt) {
     enemy.y += (moveY + nx * strafe) * enemy.speed * dt;
     enemy.x = clamp(enemy.x, 30, WORLD.w - 30);
     enemy.y = clamp(enemy.y, 30, WORLD.h - 30);
+    resolveObstacles(enemy);
   }
 
   for (let i = 0; i < enemies.length; i++) {
@@ -760,6 +788,7 @@ function updateBoss(enemy, dt) {
   enemy.y += moveY * enemy.baseSpeed * dt;
   enemy.x = clamp(enemy.x, enemy.radius + 10, WORLD.w - enemy.radius - 10);
   enemy.y = clamp(enemy.y, enemy.radius + 10, WORLD.h - enemy.radius - 10);
+  resolveObstacles(enemy);
 
   if (d < enemy.radius + player.radius + 10 && enemy.contactTimer <= 0) {
     hurtPlayer(enemy.baseDmg, enemy.angle);
@@ -875,6 +904,7 @@ function updateBossAction(enemy, dt) {
       if (clampedX !== enemy.x || clampedY !== enemy.y) enemy.actionTime = Math.min(enemy.actionTime, 0.05);
       enemy.x = clampedX;
       enemy.y = clampedY;
+      resolveObstacles(enemy);
 
       if (Math.random() < 0.85) {
         addParticle(enemy.x - Math.cos(enemy.chargeAngle) * enemy.radius * 0.7, enemy.y - Math.sin(enemy.chargeAngle) * enemy.radius * 0.7, {
@@ -1067,6 +1097,30 @@ function updateProjectiles(dt) {
 
     let remove = projectile.life <= 0;
     if (projectile.x < 0 || projectile.y < 0 || projectile.x > WORLD.w || projectile.y > WORLD.h) remove = true;
+
+    if (!remove && decor) {
+      const obstacles = [];
+      for (const crate of decor.crates) obstacles.push({ x: crate.x, y: crate.y, r: crate.size * 0.55 });
+      for (const barrel of decor.barrels) obstacles.push({ x: barrel.x, y: barrel.y, r: barrel.r });
+      for (const obs of obstacles) {
+        if (segmentCircle(projectile.prevX, projectile.prevY, projectile.x, projectile.y, obs.x, obs.y, obs.r + projectile.radius)) {
+          remove = true;
+          for (let k = 0; k < 6; k++) {
+            const a = Math.atan2(projectile.vy, projectile.vx) + rand(-1.2, 1.2);
+            addParticle(projectile.x, projectile.y, {
+              vx: Math.cos(a) * rand(40, 160),
+              vy: Math.sin(a) * rand(40, 160),
+              life: rand(0.15, 0.35),
+              size: rand(1, 2.6),
+              color: "#9aa092",
+              kind: "spark",
+              drag: 6,
+            });
+          }
+          break;
+        }
+      }
+    }
 
     if (!remove && projectile.hostile) {
       if (segmentCircle(projectile.prevX, projectile.prevY, projectile.x, projectile.y, player.x, player.y, player.radius + projectile.radius)) {

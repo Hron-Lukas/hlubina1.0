@@ -53,7 +53,7 @@ Hra nemá ukládání postupu. Obnovení stránky nebo nová hra resetuje celý 
 - Základní rychlost pohybu: `220 px/s`.
 - Poloměr postavy: `16 px`.
 - Svět má rozměry `2800 × 2100 px`; kamera hráče plynule následuje a je omezená hranicemi světa.
-- Dekorace světa jsou pouze vizuální. Kolidují pouze hranice mapy, ne bedny, barely ani potrubí.
+- Bedny a barely jsou neprůchozí a neprůstřelné — lze se za nimi schovat před střelami. Potrubí a ostatní dekorace jsou pouze vizuální. Kolidují pouze hranice mapy a bedny/barely.
 - Po zásahu je hráč na `0,32 s` nezranitelný, aby nedocházelo k okamžitému vícenásobnému poškození.
 - Hráč nemá pasivní regeneraci. Léčit se dá medkitem, dokončením vlny nebo opravou v dílně.
 - Hra se automaticky pozastaví při ztrátě fokusu okna nebo při skrytí záložky.
@@ -442,6 +442,6 @@ Chromium nebylo v prostředí dostupné, takže automatické testování proběh
 
 - Hra vyžaduje klávesnici a myš; není navržená pro dotykové ovládání.
 - Neexistuje ukládání postupu ani leaderboard.
-- Dekorace nemají kolize.
+- Potrubí a ostatní dekorace nemají kolize. Bedny a barely jsou neprůchozí a neprůstřelné.
 - Všechny zbraně mají nekonečnou munici.
 - Hra nemá zvukové soubory ani obrázky; vše vzniká za běhu procedurálně.
