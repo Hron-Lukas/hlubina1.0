@@ -1,4 +1,4 @@
-# HLUBINA // Sektor 7
+# HLUBINA1.0 // Sektor 7
 
 Top-down akční survival hra do prohlížeče v temném průmyslovém stylu. Hráč začíná s krumpáčem, likviduje vlny nepřátel, sbírá šrot a lepší zbraně, spravuje pětislotový inventář a v dílně si kupuje trvalá vylepšení.
 
