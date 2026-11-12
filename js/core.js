@@ -31,6 +31,7 @@ const STRINGS = {
     controlAttack: "attack",
     controlPickup: "pick up",
     controlDrop: "drop",
+    controlUi: "hide UI",
     inventoryAria: "Inventory",
     startEyebrow: "AUTOMATION FAILED // 03:47",
     startSubtitle: "The factory went silent. Something woke up in the warehouses.<br>Take a pickaxe and earn your way out.",
@@ -42,6 +43,7 @@ const STRINGS = {
     startDrop: "Drop weapon",
     startShop: "Workshop & upgrades",
     startPause: "Pause",
+    startUi: "Hide / show UI",
     startButton: "START SHIFT",
     shopEyebrow: "WORKSHOP // TERMINAL 04",
     shopTitle: "EQUIPMENT UPGRADES",
@@ -77,6 +79,7 @@ const STRINGS = {
     helpShop: "Workshop: upgrade damage, resistance and other stats.",
     helpSound: "Toggle sound on / off.",
     helpPause: "Pause, close windows.",
+    helpUi: "Hide or show the in-game UI.",
     helpTip: "<strong>TIP:</strong> Gold and purple weapons deal significantly more damage. When your inventory is full, stand next to a weapon and press <kbd>E</kbd> — it swaps with the one in the active slot.<br><strong>BOSS:</strong> Every fifth wave ends with a boss. Red circles and lines on the ground show where it will strike.",
     gameoverEyebrow: "OPERATOR SIGNAL LOST",
     gameoverTitle: "SHIFT TERMINATED",
@@ -152,6 +155,7 @@ const STRINGS = {
     controlAttack: "útok",
     controlPickup: "sebrat",
     controlDrop: "odhodit",
+    controlUi: "skrýt UI",
     inventoryAria: "Inventář",
     startEyebrow: "AUTOMATIZACE SELHALA // 03:47",
     startSubtitle: "Továrna zmlkla. Ve skladech se něco probudilo.<br>Vezmi krumpáč a vydělej si na cestu ven.",
@@ -163,6 +167,7 @@ const STRINGS = {
     startDrop: "Odhodit zbraň",
     startShop: "Dílna a vylepšení",
     startPause: "Pauza",
+    startUi: "Skrýt / zobrazit UI",
     startButton: "ZAHÁJIT SMĚNU",
     shopEyebrow: "DÍLNA // TERMINÁL 04",
     shopTitle: "VYLEPŠENÍ VÝBAVY",
@@ -198,6 +203,7 @@ const STRINGS = {
     helpShop: "Dílna: vylepšení poškození, odolnosti a dalších statů.",
     helpSound: "Zapnutí / vypnutí zvuku.",
     helpPause: "Pauza, zavření oken.",
+    helpUi: "Skrytí nebo zobrazení herního UI.",
     helpTip: "<strong>TIP:</strong> Zlaté a fialové zbraně mají výrazně vyšší poškození. Když je inventář plný, stůj u zbraně a stiskni <kbd>E</kbd> — vymění se za tu v aktivním slotu.<br><strong>BOSS:</strong> Každá pátá vlna končí bossem. Červené kruhy a čáry na zemi ukazují, kam udeří.",
     gameoverEyebrow: "SIGNÁL OPERÁTORA ZTRACEN",
     gameoverTitle: "SMĚNA UKONČENA",
@@ -280,6 +286,7 @@ function bossDisplayName(tier) {
 }
 
 const ui = {
+  root: document.getElementById("ui"),
   hpFill: document.getElementById("hp-fill"),
   hpText: document.getElementById("hp-text"),
   money: document.getElementById("money-text"),
@@ -364,6 +371,7 @@ var vh = window.innerHeight;
 var state = "menu";
 var modalReturn = "playing";
 var soundOn = true;
+var uiHidden = false;
 var ambientTime = 0;
 var gameTime = 0;
 var lastFrame = performance.now();
@@ -447,6 +455,17 @@ function hideOverlay(el) {
 
 function hideAllOverlays() {
   [ui.startScreen, ui.shopScreen, ui.pauseScreen, ui.helpScreen, ui.gameoverScreen].forEach(hideOverlay);
+}
+
+function setUiHidden(hidden) {
+  uiHidden = hidden;
+  ui.root.classList.toggle("ui-hidden", hidden);
+  ui.root.setAttribute("aria-hidden", hidden ? "true" : "false");
+  ui.root.inert = hidden;
+}
+
+function toggleUi() {
+  setUiHidden(!uiHidden);
 }
 
 function initAudio() {
@@ -905,6 +924,7 @@ function resetGame() {
   waveState = { number: 0, active: false, toSpawn: 0, total: 0, spawnTimer: 0, spawnInterval: 0.6, breakTimer: 0, bossPending: false, bossFight: false, bossWave: 0 };
   nearWeapon = null;
   clearKeys();
+  setUiHidden(false);
   ui.interactPrompt.classList.remove("show");
   ui.bossBar.classList.add("hidden");
   ui.bossBar.setAttribute("aria-hidden", "true");
@@ -1373,6 +1393,7 @@ window.addEventListener("keydown", (event) => {
   if (event.repeat) return;
 
   if (state === "playing") {
+    if (key === "tab") { event.preventDefault(); toggleUi(); return; }
     if (key === "b") { openShop(); return; }
     if (key === "h") { openHelp(); return; }
     if (key === "escape") { pauseGame(); return; }

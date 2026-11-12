@@ -108,6 +108,12 @@ button {
   justify-content: space-between;
 }
 
+#ui.ui-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .hud {
   display: flex;
   align-items: flex-start;
@@ -856,6 +862,10 @@ kbd {
   letter-spacing: 0.03em;
 }
 
+.control-card-wide {
+  grid-column: 1 / -1;
+}
+
 .start-footer {
   display: flex;
   align-items: center;
@@ -1296,6 +1306,10 @@ kbd {
 .help-grid > div {
   padding: 14px;
   background: rgba(10, 14, 10, 0.82);
+}
+
+.help-grid .help-wide {
+  grid-column: 1 / -1;
 }
 
 .help-grid p {

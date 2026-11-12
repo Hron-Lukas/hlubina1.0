@@ -33,6 +33,7 @@ Hru lze otevřít i přímo přes `index.html`, ale lokální HTTP server je dop
 | Pravé tlačítko na slotu | Odhození zbraně z daného slotu |
 | `B` | Otevření dílny |
 | `H` | Nápověda / ovládání |
+| `Tab` | Skrytí / zobrazení herního UI |
 | `Esc` | Pauza, zavření obchodu nebo nápovědy; v pauze přepínač jazyka EN/CZ |
 | `M` | Zapnutí/vypnutí zvuku |
 | `Enter` / `Space` v menu | Start hry |
