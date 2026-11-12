@@ -7,6 +7,278 @@ const WORLD = { w: 2800, h: 2100 };
 const TILE = 64;
 const SLOT_KEYS = ["+", "ě", "š", "č", "ř"];
 
+const STRINGS = {
+  en: {
+    docTitle: "HLUBINA1.0 // Sector 7",
+    canvasAria: "Game area",
+    brandSub: "SECTOR 7 // ENDLESS SHIFT",
+    statIntegrity: "INTEGRITY",
+    statScrap: "SCRAP",
+    statWave: "WAVE",
+    statKills: "KILLS",
+    shopBtn: "WORKSHOP",
+    shopBtnTitle: "Open workshop (B)",
+    soundTitleOn: "Sound on (M)",
+    soundTitleOff: "Sound off (M)",
+    soundAria: "Toggle sound",
+    helpBtnTitle: "Controls (H)",
+    helpBtnAria: "Help",
+    pauseBtnTitle: "Pause (Esc)",
+    pauseBtnAria: "Pause",
+    unknownTarget: "UNKNOWN TARGET",
+    activeWeapon: "ACTIVE WEAPON",
+    controlMove: "move",
+    controlAttack: "attack",
+    controlPickup: "pick up",
+    controlDrop: "drop",
+    inventoryAria: "Inventory",
+    startEyebrow: "AUTOMATION FAILED // 03:47",
+    startSubtitle: "The factory went silent. Something woke up in the warehouses.<br>Take a pickaxe and earn your way out.",
+    startMove: "Move through the sector",
+    startAim: "Weapon aiming",
+    startAttack: "Attack",
+    startSlot: "Select slot",
+    startPickup: "Pick up / swap",
+    startDrop: "Drop weapon",
+    startShop: "Workshop & upgrades",
+    startPause: "Pause",
+    startButton: "START SHIFT",
+    shopEyebrow: "WORKSHOP // TERMINAL 04",
+    shopTitle: "EQUIPMENT UPGRADES",
+    shopCurrency: "SCRAP",
+    shopCloseAria: "Close workshop",
+    shopHint: "<kbd>B</kbd> or <kbd>ESC</kbd> closes the workshop. The game is paused.",
+    repairButton: "REPAIR INTEGRITY",
+    repairFull: "INTEGRITY FULL",
+    repairCost: "{cost} SCRAP",
+    shopLevel: "LEVEL",
+    shopMaxed: "MAXED",
+    shopUpgrade: "UPGRADE // {cost} SCRAP",
+    pauseEyebrow: "SHIFT PAUSED",
+    pauseTitle: "PAUSED",
+    pauseCopy: "The factory waits. So does your scrap.",
+    resume: "RESUME",
+    pauseShop: "WORKSHOP",
+    pauseHelp: "CONTROLS",
+    pauseRestart: "NEW SHIFT",
+    languageLabel: "LANGUAGE",
+    languageEn: "EN",
+    languageCs: "CZ",
+    helpEyebrow: "OPERATOR MANUAL",
+    helpTitle: "CONTROLS",
+    helpCloseAria: "Close help",
+    helpMove: "Move the character through the sector.",
+    helpAim: "Aiming. The character turns toward the cursor.",
+    helpAttack: "Attack with the active weapon. Hold to keep firing.",
+    helpSlots: "Select an inventory slot.",
+    helpPickup: "Pick up a weapon or swap it with the active slot.",
+    helpDrop: "Drop the weapon from the active slot.",
+    helpRightClick: "Right-click a slot to drop its weapon.",
+    helpShop: "Workshop: upgrade damage, resistance and other stats.",
+    helpSound: "Toggle sound on / off.",
+    helpPause: "Pause, close windows.",
+    helpTip: "<strong>TIP:</strong> Gold and purple weapons deal significantly more damage. When your inventory is full, stand next to a weapon and press <kbd>E</kbd> — it swaps with the one in the active slot.<br><strong>BOSS:</strong> Every fifth wave ends with a boss. Red circles and lines on the ground show where it will strike.",
+    gameoverEyebrow: "OPERATOR SIGNAL LOST",
+    gameoverTitle: "SHIFT TERMINATED",
+    gameoverCopy: "Sector 7 remembers you. Try again.",
+    againButton: "NEW SHIFT",
+    statReachedWave: "Wave reached",
+    statKills: "Kills",
+    statEarned: "Earned",
+    statTime: "Shift time",
+    waveBanner: "WAVE {n}",
+    waveStartSub: "CLEANSE SECTOR 7",
+    newSignature: "NEW SIGNATURE IN THE SECTOR",
+    waveCleared: "WAVE {n} CLEARED",
+    bossIncoming: "BOSS INCOMING // GET READY",
+    sectorClearedBoss: "Sector cleared. +{bonus} scrap. Something big is waking up.",
+    supplyCrate: "+{bonus} SCRAP // SUPPLY CRATE",
+    sectorCleared: "Sector cleared. Bonus +{bonus} scrap.",
+    enemiesStatus: "ENEMIES {count} // WAVE {wave}",
+    bossInStatus: "BOSS IN {sec}s // GET READY",
+    breakStatus: "BREAK {sec}s // WORKSHOP [B]",
+    phase: "PHASE {roman}",
+    bossWaveSub: "WAVE {wave} // SURVIVE",
+    bossEntered: "Boss {name} entered the sector.",
+    bossPhase: "Boss entered phase {roman}.",
+    bossDefeatedBanner: "BOSS DEFEATED",
+    bossDefeatedSub: "{name} // +{bonus} SCRAP",
+    bossDefeatedToast: "Boss {name} destroyed. +{bonus} scrap, healing and a weapon.",
+    emptySlot: "EMPTY SLOT",
+    pressEForWeapon: "PRESS E NEAR A WEAPON",
+    melee: "MELEE",
+    ranged: "RANGED",
+    weaponTitleDamage: "Damage: {value}",
+    weaponTitleCooldown: "Cooldown: {value} s",
+    weaponTitleArea: "Area {value} rad",
+    weaponTitleSpeed: "Speed {value} m/s",
+    weaponTypeMeleeLower: "melee",
+    weaponTypeRangedLower: "ranged",
+    emptySlotTitle: "Empty slot {n}",
+    emptyLabel: "EMPTY",
+    slotEmpty: "Slot is empty.",
+    dropped: "{name} dropped.",
+    insufficientScrap: "Not enough scrap.",
+    insufficientRepair: "Not enough scrap to repair.",
+    integrityRestored: "Integrity restored.",
+    upgraded: "{name} upgraded to level {level}.",
+    swapped: "Swapped: {old} → {name}",
+    emptySlotLower: "empty slot",
+    pickUpPrompt: "PICK UP",
+    swapPrompt: "SWAP",
+    slotLower: "slot",
+    iteration: "ITERATION",
+  },
+  cs: {
+    docTitle: "HLUBINA1.0 // Sektor 7",
+    canvasAria: "Herní plocha",
+    brandSub: "SEKTOR 7 // SMĚNA BEZ KONCE",
+    statIntegrity: "INTEGRITA",
+    statScrap: "ŠROT",
+    statWave: "VLNA",
+    statKills: "ELIMINACE",
+    shopBtn: "DÍLNA",
+    shopBtnTitle: "Otevřít dílnu (B)",
+    soundTitleOn: "Zvuk zapnut (M)",
+    soundTitleOff: "Zvuk vypnut (M)",
+    soundAria: "Přepnout zvuk",
+    helpBtnTitle: "Ovládání (H)",
+    helpBtnAria: "Nápověda",
+    pauseBtnTitle: "Pauza (Esc)",
+    pauseBtnAria: "Pauza",
+    unknownTarget: "NEZNÁMÝ CÍL",
+    activeWeapon: "AKTIVNÍ ZBRAŇ",
+    controlMove: "pohyb",
+    controlAttack: "útok",
+    controlPickup: "sebrat",
+    controlDrop: "odhodit",
+    inventoryAria: "Inventář",
+    startEyebrow: "AUTOMATIZACE SELHALA // 03:47",
+    startSubtitle: "Továrna zmlkla. Ve skladech se něco probudilo.<br>Vezmi krumpáč a vydělej si na cestu ven.",
+    startMove: "Pohyb po sektoru",
+    startAim: "Míření zbraně",
+    startAttack: "Útok",
+    startSlot: "Volba slotu",
+    startPickup: "Sebrat / vyměnit",
+    startDrop: "Odhodit zbraň",
+    startShop: "Dílna a vylepšení",
+    startPause: "Pauza",
+    startButton: "ZAHÁJIT SMĚNU",
+    shopEyebrow: "DÍLNA // TERMINÁL 04",
+    shopTitle: "VYLEPŠENÍ VÝBAVY",
+    shopCurrency: "ŠROTU",
+    shopCloseAria: "Zavřít dílnu",
+    shopHint: "<kbd>B</kbd> nebo <kbd>ESC</kbd> zavře dílnu. Hra je pozastavená.",
+    repairButton: "OPRAVIT INTEGRITU",
+    repairFull: "INTEGRITA PLNÁ",
+    repairCost: "{cost} ŠROTU",
+    shopLevel: "ÚROVEŇ",
+    shopMaxed: "MAXIMUM",
+    shopUpgrade: "VYLEPŠIT // {cost} ŠROTU",
+    pauseEyebrow: "SMĚNA POZASTAVENA",
+    pauseTitle: "PAUZA",
+    pauseCopy: "Továrna počká. Tvůj šrot taky.",
+    resume: "POKRAČOVAT",
+    pauseShop: "DÍLNA",
+    pauseHelp: "OVLÁDÁNÍ",
+    pauseRestart: "NOVÁ SMĚNA",
+    languageLabel: "JAZYK",
+    languageEn: "EN",
+    languageCs: "CZ",
+    helpEyebrow: "PŘÍRUČKA OPERÁTORA",
+    helpTitle: "OVLÁDÁNÍ",
+    helpCloseAria: "Zavřít nápovědu",
+    helpMove: "Pohyb postavy po sektoru.",
+    helpAim: "Míření. Postava se otáčí za kurzorem.",
+    helpAttack: "Útok aktivní zbraní. Podrž pro palbu.",
+    helpSlots: "Výběr slotu v inventáři.",
+    helpPickup: "Sebrání zbraně, případně výměna s aktivním slotem.",
+    helpDrop: "Odhození zbraně z aktivního slotu.",
+    helpRightClick: "Kliknutí na slot odhodí zbraň.",
+    helpShop: "Dílna: vylepšení poškození, odolnosti a dalších statů.",
+    helpSound: "Zapnutí / vypnutí zvuku.",
+    helpPause: "Pauza, zavření oken.",
+    helpTip: "<strong>TIP:</strong> Zlaté a fialové zbraně mají výrazně vyšší poškození. Když je inventář plný, stůj u zbraně a stiskni <kbd>E</kbd> — vymění se za tu v aktivním slotu.<br><strong>BOSS:</strong> Každá pátá vlna končí bossem. Červené kruhy a čáry na zemi ukazují, kam udeří.",
+    gameoverEyebrow: "SIGNÁL OPERÁTORA ZTRACEN",
+    gameoverTitle: "SMĚNA UKONČENA",
+    gameoverCopy: "Sektor 7 si tě pamatuje. Zkus to znovu.",
+    againButton: "NOVÁ SMĚNA",
+    statReachedWave: "Dosažená vlna",
+    statKills: "Eliminace",
+    statEarned: "Vyděláno",
+    statTime: "Čas směny",
+    waveBanner: "VLNA {n}",
+    waveStartSub: "OČISTĚTE SEKTOR 7",
+    newSignature: "NOVÁ SIGNATURA V SEKTORU",
+    waveCleared: "VLNA {n} OČIŠTĚNA",
+    bossIncoming: "BOSS SE BLÍŽÍ // PŘIPRAV SE",
+    sectorClearedBoss: "Sektor pročištěn. +{bonus} šrotu. Něco velkého se probouzí.",
+    supplyCrate: "+{bonus} ŠROTU // ZÁSOBOVACÍ BEDNA",
+    sectorCleared: "Sektor pročištěn. Bonus +{bonus} šrotu.",
+    enemiesStatus: "NEPŘÁTELÉ {count} // VLNA {wave}",
+    bossInStatus: "BOSS ZA {sec}s // PŘIPRAV SE",
+    breakStatus: "PŘESTÁVKA {sec}s // DÍLNA [B]",
+    phase: "FÁZE {roman}",
+    bossWaveSub: "VLNA {wave} // PŘEŽIJTE",
+    bossEntered: "Boss {name} vstoupil do sektoru.",
+    bossPhase: "Boss přešel do fáze {roman}.",
+    bossDefeatedBanner: "BOSS PORAZEN",
+    bossDefeatedSub: "{name} // +{bonus} ŠROTU",
+    bossDefeatedToast: "Boss {name} zničen. +{bonus} šrotu, léčba a zbraň.",
+    emptySlot: "PRÁZDNÝ SLOT",
+    pressEForWeapon: "STISKNI E U ZBRANĚ",
+    melee: "NA BLÍZKO",
+    ranged: "STŘELNÁ",
+    weaponTitleDamage: "Poškození: {value}",
+    weaponTitleCooldown: "Prodleva: {value} s",
+    weaponTitleArea: "Oblast {value} rad",
+    weaponTitleSpeed: "Rychlost {value} m/s",
+    weaponTypeMeleeLower: "na blízko",
+    weaponTypeRangedLower: "střelná",
+    emptySlotTitle: "Prázdný slot {n}",
+    emptyLabel: "PRÁZDNÝ",
+    slotEmpty: "Slot je prázdný.",
+    dropped: "{name} odhozen.",
+    insufficientScrap: "Nedostatek šrotu.",
+    insufficientRepair: "Nedostatek šrotu na opravu.",
+    integrityRestored: "Integrita obnovena.",
+    upgraded: "{name} vylepšen na úroveň {level}.",
+    swapped: "Vyměněno: {old} → {name}",
+    emptySlotLower: "prázdný slot",
+    pickUpPrompt: "SEBRAT",
+    swapPrompt: "VYMĚNIT",
+    slotLower: "slot",
+    iteration: "ITERACE",
+  },
+};
+
+var lang = "en";
+
+function t(key, params) {
+  const table = STRINGS[lang] || STRINGS.en;
+  let value = table[key] != null ? table[key] : STRINGS.en[key] != null ? STRINGS.en[key] : key;
+  if (params) {
+    for (const [name, replacement] of Object.entries(params)) {
+      value = value.split(`{${name}}`).join(replacement);
+    }
+  }
+  return value;
+}
+
+function L(obj, field) {
+  if (!obj) return "";
+  const suffix = lang === "en" ? "En" : "Cs";
+  const value = obj[field + suffix] != null ? obj[field + suffix] : obj[field + "Cs"];
+  return value != null ? value : obj[field] || "";
+}
+
+function bossDisplayName(tier) {
+  const data = BOSS_TIERS[(tier - 1) % BOSS_TIERS.length];
+  const cycle = Math.floor((tier - 1) / BOSS_TIERS.length);
+  const name = L(data, "name");
+  return cycle > 0 ? `${name} // ${tier}. ${t("iteration")}` : name;
+}
+
 const ui = {
   hpFill: document.getElementById("hp-fill"),
   hpText: document.getElementById("hp-text"),
@@ -40,50 +312,50 @@ const ui = {
 };
 
 const RARITIES = {
-  common: { name: "Obyčejná", color: "#9aa092", mult: 1, weight: 52, suffix: "" },
-  uncommon: { name: "Neobvyklá", color: "#84c16c", mult: 1.2, weight: 26, suffix: " Mk. II" },
-  rare: { name: "Vzácná", color: "#68a8d8", mult: 1.48, weight: 13, suffix: " Mk. III" },
-  epic: { name: "Epická", color: "#b184d0", mult: 1.85, weight: 6, suffix: " // Prototyp" },
-  legendary: { name: "Legendární", color: "#e6b657", mult: 2.35, weight: 3, suffix: " // Relikvie" },
+  common: { nameCs: "Obyčejná", nameEn: "Common", color: "#9aa092", mult: 1, weight: 52, suffixCs: "", suffixEn: "" },
+  uncommon: { nameCs: "Neobvyklá", nameEn: "Uncommon", color: "#84c16c", mult: 1.2, weight: 26, suffixCs: " Mk. II", suffixEn: " Mk. II" },
+  rare: { nameCs: "Vzácná", nameEn: "Rare", color: "#68a8d8", mult: 1.48, weight: 13, suffixCs: " Mk. III", suffixEn: " Mk. III" },
+  epic: { nameCs: "Epická", nameEn: "Epic", color: "#b184d0", mult: 1.85, weight: 6, suffixCs: " // Prototyp", suffixEn: " // Prototype" },
+  legendary: { nameCs: "Legendární", nameEn: "Legendary", color: "#e6b657", mult: 2.35, weight: 3, suffixCs: " // Relikvie", suffixEn: " // Relic" },
 };
 
 const WEAPONS = {
-  pickaxe: { name: "Krumpáč", type: "melee", dmg: 18, cd: 0.42, range: 64, arc: 1.45, knock: 145, color: "#d8a35e", minWave: 0, weight: 0, icon: "pickaxe" },
-  pipe: { name: "Trubkový klíč", type: "melee", dmg: 27, cd: 0.58, range: 72, arc: 1.3, knock: 190, color: "#9da89b", minWave: 1, weight: 9, icon: "pipe" },
-  knife: { name: "Řezný nůž", type: "melee", dmg: 20, cd: 0.24, range: 58, arc: 1.02, knock: 70, color: "#c8d2cc", minWave: 1, weight: 9, icon: "knife" },
-  sledge: { name: "Bourací kladivo", type: "melee", dmg: 58, cd: 0.88, range: 84, arc: 1.9, knock: 285, color: "#c3a06b", minWave: 3, weight: 5, icon: "sledge" },
-  chainsaw: { name: "Řetězová pila", type: "melee", dmg: 13, cd: 0.13, range: 66, arc: 1.02, knock: 42, color: "#c79c5e", minWave: 3, weight: 5, icon: "chainsaw" },
-  plasma: { name: "Plazmový řezák", type: "melee", dmg: 70, cd: 0.44, range: 90, arc: 1.65, knock: 225, color: "#69c7b7", minWave: 5, weight: 3, icon: "plasma" },
-  pistol: { name: "Šrotová pistole", type: "ranged", dmg: 17, cd: 0.31, speed: 980, range: 720, spread: 0.025, pellets: 1, color: "#c3a775", minWave: 1, weight: 10, icon: "pistol" },
-  nailgun: { name: "Hřebíkovačka", type: "ranged", dmg: 9, cd: 0.1, speed: 1050, range: 650, spread: 0.075, pellets: 1, color: "#9fb5b0", minWave: 2, weight: 7, icon: "nailgun" },
-  smg: { name: "Kompresní SMG", type: "ranged", dmg: 12, cd: 0.085, speed: 1100, range: 700, spread: 0.11, pellets: 1, color: "#b8b0a0", minWave: 3, weight: 6, icon: "smg" },
-  shotgun: { name: "Šrotovnice", type: "ranged", dmg: 11, cd: 0.78, speed: 850, range: 430, spread: 0.3, pellets: 5, color: "#c88e5e", minWave: 2, weight: 7, icon: "shotgun" },
-  rifle: { name: "Průbojná puška", type: "ranged", dmg: 58, cd: 0.92, speed: 1600, range: 1000, spread: 0.008, pellets: 1, pierce: 2, color: "#8fb4c9", minWave: 4, weight: 4, icon: "rifle" },
-  arc: { name: "Obloukový vybíječ", type: "ranged", dmg: 31, cd: 0.24, speed: 760, range: 620, spread: 0.04, pellets: 1, pierce: 1, color: "#b184d0", minWave: 5, weight: 3, icon: "arc" },
+  pickaxe: { nameCs: "Krumpáč", nameEn: "Pickaxe", type: "melee", dmg: 18, cd: 0.42, range: 64, arc: 1.45, knock: 145, color: "#d8a35e", minWave: 0, weight: 0, icon: "pickaxe" },
+  pipe: { nameCs: "Trubkový klíč", nameEn: "Pipe Wrench", type: "melee", dmg: 27, cd: 0.58, range: 72, arc: 1.3, knock: 190, color: "#9da89b", minWave: 1, weight: 9, icon: "pipe" },
+  knife: { nameCs: "Řezný nůž", nameEn: "Cutting Knife", type: "melee", dmg: 20, cd: 0.24, range: 58, arc: 1.02, knock: 70, color: "#c8d2cc", minWave: 1, weight: 9, icon: "knife" },
+  sledge: { nameCs: "Bourací kladivo", nameEn: "Demolition Hammer", type: "melee", dmg: 58, cd: 0.88, range: 84, arc: 1.9, knock: 285, color: "#c3a06b", minWave: 3, weight: 5, icon: "sledge" },
+  chainsaw: { nameCs: "Řetězová pila", nameEn: "Chainsaw", type: "melee", dmg: 13, cd: 0.13, range: 66, arc: 1.02, knock: 42, color: "#c79c5e", minWave: 3, weight: 5, icon: "chainsaw" },
+  plasma: { nameCs: "Plazmový řezák", nameEn: "Plasma Cutter", type: "melee", dmg: 70, cd: 0.44, range: 90, arc: 1.65, knock: 225, color: "#69c7b7", minWave: 5, weight: 3, icon: "plasma" },
+  pistol: { nameCs: "Šrotová pistole", nameEn: "Scrap Pistol", type: "ranged", dmg: 17, cd: 0.31, speed: 980, range: 720, spread: 0.025, pellets: 1, color: "#c3a775", minWave: 1, weight: 10, icon: "pistol" },
+  nailgun: { nameCs: "Hřebíkovačka", nameEn: "Nailgun", type: "ranged", dmg: 9, cd: 0.1, speed: 1050, range: 650, spread: 0.075, pellets: 1, color: "#9fb5b0", minWave: 2, weight: 7, icon: "nailgun" },
+  smg: { nameCs: "Kompresní SMG", nameEn: "Compressed SMG", type: "ranged", dmg: 12, cd: 0.085, speed: 1100, range: 700, spread: 0.11, pellets: 1, color: "#b8b0a0", minWave: 3, weight: 6, icon: "smg" },
+  shotgun: { nameCs: "Šrotovnice", nameEn: "Scrap Shotgun", type: "ranged", dmg: 11, cd: 0.78, speed: 850, range: 430, spread: 0.3, pellets: 5, color: "#c88e5e", minWave: 2, weight: 7, icon: "shotgun" },
+  rifle: { nameCs: "Průbojná puška", nameEn: "Piercing Rifle", type: "ranged", dmg: 58, cd: 0.92, speed: 1600, range: 1000, spread: 0.008, pellets: 1, pierce: 2, color: "#8fb4c9", minWave: 4, weight: 4, icon: "rifle" },
+  arc: { nameCs: "Obloukový vybíječ", nameEn: "Arc Discharger", type: "ranged", dmg: 31, cd: 0.24, speed: 760, range: 620, spread: 0.04, pellets: 1, pierce: 1, color: "#b184d0", minWave: 5, weight: 3, icon: "arc" },
 };
 
 const ENEMY_TYPES = {
-  scav: { name: "Šrotovník", hp: 42, speed: 74, dmg: 9, radius: 15, coins: [3, 7], color: "#9a6844", eye: "#ff5c38" },
-  drone: { name: "Dron", hp: 30, speed: 104, dmg: 7, radius: 12, coins: [4, 8], color: "#788782", eye: "#ff4c32", ranged: true, preferred: 285, fireCd: 2.15, projSpeed: 340, projDmg: 8 },
-  stalker: { name: "Stínošlap", hp: 32, speed: 150, dmg: 11, radius: 13, coins: [5, 9], color: "#6d5c68", eye: "#ff6b55" },
-  gunner: { name: "Vrtačka", hp: 76, speed: 56, dmg: 12, radius: 19, coins: [8, 14], color: "#807960", eye: "#ff5a36", ranged: true, preferred: 335, fireCd: 2.45, projSpeed: 400, projDmg: 11 },
-  brute: { name: "Těžkooděnec", hp: 190, speed: 44, dmg: 22, radius: 25, coins: [12, 22], color: "#7d6650", eye: "#ff4a2d" },
+  scav: { nameCs: "Šrotovník", nameEn: "Scrapper", hp: 42, speed: 74, dmg: 9, radius: 15, coins: [3, 7], color: "#9a6844", eye: "#ff5c38" },
+  drone: { nameCs: "Dron", nameEn: "Drone", hp: 30, speed: 104, dmg: 7, radius: 12, coins: [4, 8], color: "#788782", eye: "#ff4c32", ranged: true, preferred: 285, fireCd: 2.15, projSpeed: 340, projDmg: 8 },
+  stalker: { nameCs: "Stínošlap", nameEn: "Shadewalker", hp: 32, speed: 150, dmg: 11, radius: 13, coins: [5, 9], color: "#6d5c68", eye: "#ff6b55" },
+  gunner: { nameCs: "Vrtačka", nameEn: "Drill", hp: 76, speed: 56, dmg: 12, radius: 19, coins: [8, 14], color: "#807960", eye: "#ff5a36", ranged: true, preferred: 335, fireCd: 2.45, projSpeed: 400, projDmg: 11 },
+  brute: { nameCs: "Těžkooděnec", nameEn: "Heavy Trooper", hp: 190, speed: 44, dmg: 22, radius: 25, coins: [12, 22], color: "#7d6650", eye: "#ff4a2d" },
 };
 
 const BOSS_TIERS = [
-  { name: "DOZORCE SMĚNY", color: "#b66a3f", eye: "#ffb347", accent: "#e8a13c", addPool: ["scav", "stalker"] },
-  { name: "DRTIČ PLÁTŮ", color: "#8a5a4a", eye: "#ff5c38", accent: "#d9583f", addPool: ["scav", "stalker", "drone"] },
-  { name: "REAKTOROVÝ TITÁN", color: "#6f7a5c", eye: "#ffd166", accent: "#e6b657", addPool: ["drone", "gunner", "stalker"] },
-  { name: "PÁN HLUBINY", color: "#5c4b68", eye: "#ff4c32", accent: "#b184d0", addPool: ["gunner", "brute", "stalker"] },
+  { nameCs: "DOZORCE SMĚNY", nameEn: "SHIFT OVERSEER", color: "#b66a3f", eye: "#ffb347", accent: "#e8a13c", addPool: ["scav", "stalker"] },
+  { nameCs: "DRTIČ PLÁTŮ", nameEn: "PLATE CRUSHER", color: "#8a5a4a", eye: "#ff5c38", accent: "#d9583f", addPool: ["scav", "stalker", "drone"] },
+  { nameCs: "REAKTOROVÝ TITÁN", nameEn: "REACTOR TITAN", color: "#6f7a5c", eye: "#ffd166", accent: "#e6b657", addPool: ["drone", "gunner", "stalker"] },
+  { nameCs: "PÁN HLUBINY", nameEn: "LORD OF THE DEEP", color: "#5c4b68", eye: "#ff4c32", accent: "#b184d0", addPool: ["gunner", "brute", "stalker"] },
 ];
 
 const UPGRADES = [
-  { id: "damage", name: "Servo úderu", icon: "DMG", color: "#ef7133", desc: "+15 % poškození všech zbraní.", baseCost: 40, growth: 1.55, max: 15 },
-  { id: "armor", name: "Pancéřové pláty", icon: "ARM", color: "#70a8c9", desc: "-6,5 % přijímaného poškození.", baseCost: 45, growth: 1.6, max: 10 },
-  { id: "hp", name: "Chladicí jádro", icon: "HP", color: "#a6c36b", desc: "+20 maximální integrity a léčení.", baseCost: 35, growth: 1.5, max: 12 },
-  { id: "speed", name: "Exo-servo", icon: "SPD", color: "#e8a13c", desc: "+6 % rychlosti pohybu.", baseCost: 50, growth: 1.58, max: 10 },
-  { id: "luck", name: "Spektrální skener", icon: "LCK", color: "#b184d0", desc: "Vyšší šance na vzácnější zbraně.", baseCost: 60, growth: 1.62, max: 10 },
-  { id: "magnet", name: "Polní magnet", icon: "MAG", color: "#69c7b7", desc: "+28 % dosah přitahování šrotu.", baseCost: 30, growth: 1.5, max: 8 },
+  { id: "damage", nameCs: "Servo úderu", nameEn: "Strike Servo", icon: "DMG", color: "#ef7133", descCs: "+15 % poškození všech zbraní.", descEn: "+15% damage of all weapons.", baseCost: 40, growth: 1.55, max: 15 },
+  { id: "armor", nameCs: "Pancéřové pláty", nameEn: "Armor Plates", icon: "ARM", color: "#70a8c9", descCs: "-6,5 % přijímaného poškození.", descEn: "-6.5% damage taken.", baseCost: 45, growth: 1.6, max: 10 },
+  { id: "hp", nameCs: "Chladicí jádro", nameEn: "Cooling Core", icon: "HP", color: "#a6c36b", descCs: "+20 maximální integrity a léčení.", descEn: "+20 max integrity and healing.", baseCost: 35, growth: 1.5, max: 12 },
+  { id: "speed", nameCs: "Exo-servo", nameEn: "Exo Servo", icon: "SPD", color: "#e8a13c", descCs: "+6 % rychlosti pohybu.", descEn: "+6% movement speed.", baseCost: 50, growth: 1.58, max: 10 },
+  { id: "luck", nameCs: "Spektrální skener", nameEn: "Spectral Scanner", icon: "LCK", color: "#b184d0", descCs: "Vyšší šance na vzácnější zbraně.", descEn: "Higher chance for rarer weapons.", baseCost: 60, growth: 1.62, max: 10 },
+  { id: "magnet", nameCs: "Polní magnet", nameEn: "Field Magnet", icon: "MAG", color: "#69c7b7", descCs: "+28 % dosah přitahování šrotu.", descEn: "+28% scrap attraction range.", baseCost: 30, growth: 1.5, max: 8 },
 ];
 
 var dpr = 1;
@@ -294,7 +566,8 @@ function toggleSound() {
   }
   ui.soundBtn.textContent = soundOn ? "♪" : "×";
   ui.soundBtn.classList.toggle("off", !soundOn);
-  ui.soundBtn.title = soundOn ? "Zvuk zapnut (M)" : "Zvuk vypnut (M)";
+  ui.soundBtn.title = t(soundOn ? "soundTitleOn" : "soundTitleOff");
+  ui.soundBtn.setAttribute("aria-label", t("soundAria"));
 }
 
 function flashDamage() {
@@ -468,10 +741,10 @@ function makeStartingWeapon() {
   return {
     uid: ++weaponSeq,
     template: "pickaxe",
-    name: base.name,
+    name: L(base, "name"),
     type: base.type,
     rarity: "common",
-    rarityName: RARITIES.common.name,
+    rarityName: L(RARITIES.common, "name"),
     rarityColor: RARITIES.common.color,
     dmg: base.dmg,
     cd: base.cd,
@@ -526,10 +799,10 @@ function generateWeapon(wave, luckBonus = 0) {
   return {
     uid: ++weaponSeq,
     template: templateId,
-    name: `${base.name}${rarity.suffix}`,
+    name: `${L(base, "name")}${L(rarity, "suffix")}`,
     type: base.type,
     rarity: rarityId,
-    rarityName: rarity.name,
+    rarityName: L(rarity, "name"),
     rarityColor: rarity.color,
     dmg: base.dmg * rarity.mult * levelScale,
     cd: base.cd * (1 - (rarity.mult - 1) * 0.045),
@@ -645,7 +918,7 @@ function startGame() {
   resetGame();
   hideAllOverlays();
   state = "playing";
-  showBanner("VLNA 01", "OČISTĚTE SEKTOR 7");
+  showBanner(t("waveBanner", { n: "01" }), t("waveStartSub"));
   startWave(1);
   sfx("wave");
 }
@@ -665,7 +938,7 @@ function startWave(number) {
   ui.bossBar.classList.add("hidden");
   ui.bossBar.setAttribute("aria-hidden", "true");
   if (number > 1) {
-    showBanner(`VLNA ${String(number).padStart(2, "0")}`, "NOVÁ SIGNATURA V SEKTORU");
+    showBanner(t("waveBanner", { n: String(number).padStart(2, "0") }), t("newSignature"));
     sfx("wave");
   }
 }
@@ -678,12 +951,13 @@ function completeWave() {
   const bonus = 8 + waveState.number * 6;
   player.hp = Math.min(player.maxHp, player.hp + player.maxHp * 0.12);
   earnMoney(bonus);
+  const clearedWave = String(waveState.number).padStart(2, "0");
   if (bossNext) {
-    showBanner(`VLNA ${String(waveState.number).padStart(2, "0")} OČIŠTĚNA`, "BOSS SE BLÍŽÍ // PŘIPRAV SE");
-    toast(`Sektor pročištěn. +${bonus} šrotu. Něco velkého se probouzí.`, "rare");
+    showBanner(t("waveCleared", { n: clearedWave }), t("bossIncoming"));
+    toast(t("sectorClearedBoss", { bonus }), "rare");
   } else {
-    showBanner(`VLNA ${String(waveState.number).padStart(2, "0")} OČIŠTĚNA`, `+${bonus} ŠROTU // ZÁSOBOVACÍ BEDNA`);
-    toast(`Sektor pročištěn. Bonus +${bonus} šrotu.`, "good");
+    showBanner(t("waveCleared", { n: clearedWave }), t("supplyCrate", { bonus }));
+    toast(t("sectorCleared", { bonus }), "good");
   }
   const reward = generateWeapon(waveState.number, 1.5);
   spawnWeaponPickup(player.x + rand(-42, 42), player.y + rand(-42, 42), reward, 0.6, true);
@@ -705,11 +979,11 @@ function updateHud() {
     if (waveState.bossFight && boss) {
       ui.waveStatus.textContent = `BOSS // ${boss.name}`;
     } else if (waveState.active) {
-      ui.waveStatus.textContent = `NEPŘÁTELÉ ${enemies.length + waveState.toSpawn} // VLNA ${waveState.number}`;
+      ui.waveStatus.textContent = t("enemiesStatus", { count: enemies.length + waveState.toSpawn, wave: waveState.number });
     } else if (waveState.breakTimer > 0) {
       ui.waveStatus.textContent = waveState.bossPending
-        ? `BOSS ZA ${Math.ceil(waveState.breakTimer)}s // PŘIPRAV SE`
-        : `PŘESTÁVKA ${Math.ceil(waveState.breakTimer)}s // DÍLNA [B]`;
+        ? t("bossInStatus", { sec: Math.ceil(waveState.breakTimer) })
+        : t("breakStatus", { sec: Math.ceil(waveState.breakTimer) });
     } else {
       ui.waveStatus.textContent = "";
     }
@@ -729,39 +1003,40 @@ function updateBossHud() {
   ui.bossHpFill.style.width = `${pct}%`;
   ui.bossName.textContent = boss.name;
   ui.bossHpText.textContent = `${Math.ceil(Math.max(0, boss.hp))} / ${boss.maxHp}`;
-  ui.bossPhase.textContent = `FÁZE ${["I", "II", "III"][clamp(boss.phase, 1, 3) - 1]}`;
+  ui.bossPhase.textContent = t("phase", { roman: ["I", "II", "III"][clamp(boss.phase, 1, 3) - 1] });
   ui.bossBar.dataset.phase = String(boss.phase);
 }
 
 function updateActiveWeapon() {
   const weapon = inventory[selectedSlot];
   if (!weapon) {
-    ui.activeName.textContent = "PRÁZDNÝ SLOT";
+    ui.activeName.textContent = t("emptySlot");
     ui.activeName.style.color = "#717a6e";
-    ui.activeStats.textContent = "STISKNI E U ZBRANĚ";
+    ui.activeStats.textContent = t("pressEForWeapon");
     return;
   }
   ui.activeName.textContent = weapon.name;
   ui.activeName.style.color = weapon.rarityColor;
   const damage = Math.round(weapon.dmg * playerDamageMult());
-  const kind = weapon.type === "melee" ? "NA BLÍZKO" : "STŘELNÁ";
+  const kind = weapon.type === "melee" ? t("melee") : t("ranged");
   ui.activeStats.textContent = `${damage} DMG // ${weapon.cd.toFixed(2)}s // ${kind}`;
 }
 
 function weaponTitle(weapon) {
   const damage = Math.round(weapon.dmg * playerDamageMult());
-  const speed = weapon.type === "melee" ? `Oblast ${weapon.arc.toFixed(1)} rad` : `Rychlost ${weapon.speed} m/s`;
-  return `${weapon.name}\n${weapon.rarityName} // ${weapon.type === "melee" ? "na blízko" : "střelná"}\nPoškození: ${damage}\nProdleva: ${weapon.cd.toFixed(2)} s\n${speed}`;
+  const speed = weapon.type === "melee" ? t("weaponTitleArea", { value: weapon.arc.toFixed(1) }) : t("weaponTitleSpeed", { value: weapon.speed });
+  const type = weapon.type === "melee" ? t("weaponTypeMeleeLower") : t("weaponTypeRangedLower");
+  return `${weapon.name}\n${weapon.rarityName} // ${type}\n${t("weaponTitleDamage", { value: damage })}\n${t("weaponTitleCooldown", { value: weapon.cd.toFixed(2) })}\n${speed}`;
 }
 
 function renderHotbar() {
   ui.hotbar.innerHTML = inventory
     .map((weapon, index) => {
       if (!weapon) {
-        return `<button class="slot empty ${index === selectedSlot ? "selected" : ""}" data-slot="${index}" type="button" title="Prázdný slot ${index + 1}">
+        return `<button class="slot empty ${index === selectedSlot ? "selected" : ""}" data-slot="${index}" type="button" title="${t("emptySlotTitle", { n: index + 1 })}">
           <span class="slot-key">${SLOT_KEYS[index]}</span>
           <span class="slot-empty-mark">—</span>
-          <span class="slot-name">PRÁZDNÝ</span>
+          <span class="slot-name">${t("emptyLabel")}</span>
         </button>`;
       }
       return `<button class="slot ${index === selectedSlot ? "selected" : ""}" data-slot="${index}" type="button" style="--rarity:${weapon.rarityColor}" title="${weaponTitle(weapon).replace(/\n/g, "&#10;")}">
@@ -794,7 +1069,7 @@ function dropSlot(index) {
   if (state !== "playing") return;
   const weapon = inventory[index];
   if (!weapon) {
-    toast("Slot je prázdný.", "bad");
+    toast(t("slotEmpty"), "bad");
     return;
   }
   inventory[index] = null;
@@ -810,7 +1085,7 @@ function dropSlot(index) {
       drag: 5,
     });
   }
-  toast(`${weapon.name} odhozen.`, "bad");
+  toast(t("dropped", { name: weapon.name }), "bad");
   sfx("click");
   renderHotbar();
 }
@@ -840,13 +1115,13 @@ function renderShop() {
     return `<article class="upgrade-card" style="--upgrade-color:${def.color}">
       <div class="upgrade-top">
         <div class="upgrade-icon">${def.icon}</div>
-        <div class="upgrade-level">ÚROVEŇ <strong>${level}</strong> / ${def.max}</div>
+        <div class="upgrade-level">${t("shopLevel")} <strong>${level}</strong> / ${def.max}</div>
       </div>
-      <h3 class="upgrade-name">${def.name}</h3>
-      <p class="upgrade-desc">${def.desc}</p>
+      <h3 class="upgrade-name">${L(def, "name")}</h3>
+      <p class="upgrade-desc">${L(def, "desc")}</p>
       <div class="upgrade-pips">${pips}</div>
       <button class="upgrade-buy ${maxed ? "maxed" : ""}" data-upgrade="${def.id}" type="button" ${maxed || !canBuy ? "disabled" : ""}>
-        ${maxed ? "MAXIMUM" : `VYLEPŠIT // ${cost} ŠROTU`}
+        ${maxed ? t("shopMaxed") : t("shopUpgrade", { cost })}
       </button>
     </article>`;
   }).join("");
@@ -854,7 +1129,7 @@ function renderShop() {
   const cost = repairCost();
   const full = player.hp >= player.maxHp - 0.1;
   ui.repairBtn.disabled = full || getMoney() < cost;
-  ui.repairCost.textContent = full ? "INTEGRITA PLNÁ" : `${cost} ŠROTU`;
+  ui.repairCost.textContent = full ? t("repairFull") : t("repairCost", { cost });
 }
 
 function buyUpgrade(id) {
@@ -865,7 +1140,7 @@ function buyUpgrade(id) {
   if (level >= def.max) return;
   const cost = upgradeCost(def);
   if (!spendMoney(cost)) {
-    toast("Nedostatek šrotu.", "bad");
+    toast(t("insufficientScrap"), "bad");
     sfx("click");
     return;
   }
@@ -874,7 +1149,7 @@ function buyUpgrade(id) {
     player.maxHp += 20;
     player.hp = Math.min(player.maxHp, player.hp + 20);
   }
-  toast(`${def.name} vylepšen na úroveň ${player.upgrades[id]}.`, "good");
+  toast(t("upgraded", { name: L(def, "name"), level: player.upgrades[id] }), "good");
   sfx("upgrade");
   renderShop();
   renderHotbar();
@@ -887,14 +1162,74 @@ function repairPlayer() {
   if (missing <= 0.1) return;
   const cost = repairCost();
   if (!spendMoney(cost)) {
-    toast("Nedostatek šrotu na opravu.", "bad");
+    toast(t("insufficientRepair"), "bad");
     return;
   }
   player.hp = player.maxHp;
-  toast("Integrita obnovena.", "good");
+  toast(t("integrityRestored"), "good");
   sfx("upgrade");
   renderShop();
   updateHud();
+}
+
+function refreshWeaponName(weapon) {
+  const base = WEAPONS[weapon.template];
+  const rarity = RARITIES[weapon.rarity];
+  if (!base || !rarity) return;
+  weapon.name = `${L(base, "name")}${L(rarity, "suffix")}`;
+  weapon.rarityName = L(rarity, "name");
+}
+
+function refreshLocalizedNames() {
+  if (!player) return;
+  for (const weapon of inventory) {
+    if (weapon) refreshWeaponName(weapon);
+  }
+  for (const pickup of pickups) {
+    if (pickup.kind === "weapon" && pickup.weapon) refreshWeaponName(pickup.weapon);
+  }
+  for (const enemy of enemies) {
+    enemy.name = enemy.boss ? bossDisplayName(enemy.bossTier) : L(ENEMY_TYPES[enemy.type], "name");
+  }
+  if (boss) boss.name = bossDisplayName(boss.bossTier);
+}
+
+function applyLanguage() {
+  document.documentElement.lang = lang;
+  document.title = t("docTitle");
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const value = t(el.dataset.i18n);
+    if (value.includes("<")) el.innerHTML = value;
+    else el.textContent = value;
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    el.title = t(el.dataset.i18nTitle);
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute("aria-label", t(el.dataset.i18nAria));
+  });
+  document.querySelectorAll("[data-lang]").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+  if (ui.soundBtn) {
+    ui.soundBtn.title = t(soundOn ? "soundTitleOn" : "soundTitleOff");
+    ui.soundBtn.setAttribute("aria-label", t("soundAria"));
+  }
+  if (player) {
+    refreshLocalizedNames();
+    renderHotbar();
+    updateHud();
+    if (state === "shop") renderShop();
+    if (state === "gameover") renderGameoverStats();
+  }
+}
+
+function setLanguage(next) {
+  if (next !== "en" && next !== "cs") return;
+  if (lang === next) return;
+  lang = next;
+  applyLanguage();
+  sfx("click");
 }
 
 function openShop() {
@@ -949,16 +1284,20 @@ function resumeGame() {
   sfx("click");
 }
 
+function renderGameoverStats() {
+  ui.gameoverStats.innerHTML = `
+    <div class="gameover-stat"><span>${t("statReachedWave")}</span><strong>${waveState.number}</strong></div>
+    <div class="gameover-stat"><span>${t("statKills")}</span><strong>${kills}</strong></div>
+    <div class="gameover-stat"><span>${t("statEarned")}</span><strong>${Math.floor(totalEarned)}</strong></div>
+    <div class="gameover-stat"><span>${t("statTime")}</span><strong>${formatTime(gameTime)}</strong></div>`;
+}
+
 function endGame() {
   if (state === "gameover") return;
   state = "gameover";
   clearKeys();
   sfx("gameover");
-  ui.gameoverStats.innerHTML = `
-    <div class="gameover-stat"><span>Dosažená vlna</span><strong>${waveState.number}</strong></div>
-    <div class="gameover-stat"><span>Eliminace</span><strong>${kills}</strong></div>
-    <div class="gameover-stat"><span>Vyděláno</span><strong>${Math.floor(totalEarned)}</strong></div>
-    <div class="gameover-stat"><span>Čas směny</span><strong>${formatTime(gameTime)}</strong></div>`;
+  renderGameoverStats();
   showOverlay(ui.gameoverScreen);
   updateHud();
 }
@@ -994,6 +1333,9 @@ document.getElementById("pause-help-btn").addEventListener("click", openHelp);
 document.getElementById("restart-btn").addEventListener("click", startGame);
 document.getElementById("again-btn").addEventListener("click", startGame);
 document.getElementById("repair-btn").addEventListener("click", repairPlayer);
+document.querySelectorAll("[data-lang]").forEach((button) => {
+  button.addEventListener("click", () => setLanguage(button.dataset.lang));
+});
 
 ui.upgradeGrid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-upgrade]");

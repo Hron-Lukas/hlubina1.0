@@ -290,8 +290,8 @@ function killEnemy(enemy) {
     }
     const bossWeapon = generateWeapon(waveState.number + 1, 2);
     spawnWeaponPickup(enemy.x + rand(-22, 22), enemy.y + rand(-22, 22), bossWeapon, 0.5);
-    showBanner("BOSS PORAZEN", `${enemy.name} // +${bossBonus} ŠROTU`);
-    toast(`Boss ${enemy.name} zničen. +${bossBonus} šrotu, léčba a zbraň.`, "rare");
+    showBanner(t("bossDefeatedBanner"), t("bossDefeatedSub", { name: enemy.name, bonus: bossBonus }));
+    toast(t("bossDefeatedToast", { name: enemy.name, bonus: bossBonus }), "rare");
     camera.shake = Math.max(camera.shake, 14);
     sfx("boss");
     updateBossHud();
@@ -422,7 +422,7 @@ function spawnEnemy(typeId, elite = false, spawnPos = null, spawnDelay = 0.55) {
   const enemy = {
     id: ++enemySeq,
     type: typeId,
-    name: base.name,
+    name: L(base, "name"),
     x: pos.x,
     y: pos.y,
     radius: base.radius * (elite ? 1.13 : 1),
@@ -588,11 +588,10 @@ function updateEnemies(dt) {
 function getBossTier(bossWave) {
   const tier = Math.max(1, Math.floor(bossWave / 5));
   const data = BOSS_TIERS[(tier - 1) % BOSS_TIERS.length];
-  const cycle = Math.floor((tier - 1) / BOSS_TIERS.length);
   return {
     ...data,
     tier,
-    name: cycle > 0 ? `${data.name} // ${tier}. ITERACE` : data.name,
+    name: bossDisplayName(tier),
   };
 }
 
@@ -710,8 +709,8 @@ function spawnBoss(bossWave) {
     });
   }
 
-  showBanner(`BOSS // ${info.name}`, `VLNA ${bossWave} // PŘEŽIJTE`);
-  toast(`Boss ${info.name} vstoupil do sektoru.`, "rare");
+  showBanner(`BOSS // ${info.name}`, t("bossWaveSub", { wave: bossWave }));
+  toast(t("bossEntered", { name: info.name }), "rare");
   camera.shake = Math.max(camera.shake, 11);
   sfx("boss");
   updateBossHud();
@@ -766,8 +765,9 @@ function updateBoss(enemy, dt) {
         drag: 4,
       });
     }
-    showBanner(`FÁZE ${["I", "II", "III"][enemy.phase - 1]}`, enemy.name);
-    toast(`Boss přešel do fáze ${["I", "II", "III"][enemy.phase - 1]}.`, "rare");
+    const phaseRoman = ["I", "II", "III"][enemy.phase - 1];
+    showBanner(t("phase", { roman: phaseRoman }), enemy.name);
+    toast(t("bossPhase", { roman: phaseRoman }), "rare");
     sfx("wave");
     updateBossHud();
   }
@@ -1207,7 +1207,7 @@ function pickupWeapon(pickup, index) {
     inventory[index] = weapon;
     removePickup(pickup);
     if (old) spawnWeaponPickup(player.x + rand(-28, 28), player.y + rand(-28, 28), old, 1.1);
-    toast(`Vyměněno: ${old ? old.name : "prázdný slot"} → ${weapon.name}`, ["epic", "legendary"].includes(weapon.rarity) ? "rare" : "");
+    toast(t("swapped", { old: old ? old.name : t("emptySlotLower"), name: weapon.name }), ["epic", "legendary"].includes(weapon.rarity) ? "rare" : "");
     sfx("pickup");
     renderHotbar();
     return true;
@@ -1385,10 +1385,10 @@ function updateInteractPrompt() {
   }
   const empty = inventory.indexOf(null);
   if (empty >= 0) {
-    ui.interactPrompt.innerHTML = `<kbd>E</kbd> SEBRAT <span style="color:${nearWeapon.weapon.rarityColor}">${nearWeapon.weapon.name}</span>`;
+    ui.interactPrompt.innerHTML = `<kbd>E</kbd> ${t("pickUpPrompt")} <span style="color:${nearWeapon.weapon.rarityColor}">${nearWeapon.weapon.name}</span>`;
   } else {
     const current = inventory[selectedSlot];
-    ui.interactPrompt.innerHTML = `<kbd>E</kbd> VYMĚNIT ${current ? current.name : "slot"} → <span style="color:${nearWeapon.weapon.rarityColor}">${nearWeapon.weapon.name}</span>`;
+    ui.interactPrompt.innerHTML = `<kbd>E</kbd> ${t("swapPrompt")} ${current ? current.name : t("slotLower")} → <span style="color:${nearWeapon.weapon.rarityColor}">${nearWeapon.weapon.name}</span>`;
   }
   ui.interactPrompt.classList.add("show");
 }

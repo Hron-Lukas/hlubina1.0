@@ -749,6 +749,7 @@ function init() {
   decor = createDecor();
   resetGame();
   state = "menu";
+  applyLanguage();
   window.addEventListener("resize", resize);
   lastFrame = performance.now();
   requestAnimationFrame(frame);

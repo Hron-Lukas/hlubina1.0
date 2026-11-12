@@ -2,7 +2,7 @@
 
 Top-down akční survival hra do prohlížeče v temném průmyslovém stylu. Hráč začíná s krumpáčem, likviduje vlny nepřátel, sbírá šrot a lepší zbraně, spravuje pětislotový inventář a v dílně si kupuje trvalá vylepšení.
 
-Hra je celá v češtině, běží bez instalace a bez externích knihoven. Grafika, svět i zvuky se generují procedurálně v prohlížeči.
+Hru lze přepnout mezi češtinou a angličtinou; výchozím jazykem je angličtina. Běží bez instalace a bez externích knihoven. Grafika, svět i zvuky se generují procedurálně v prohlížeči.
 
 ## Rychlý start
 
@@ -33,7 +33,7 @@ Hru lze otevřít i přímo přes `index.html`, ale lokální HTTP server je dop
 | Pravé tlačítko na slotu | Odhození zbraně z daného slotu |
 | `B` | Otevření dílny |
 | `H` | Nápověda / ovládání |
-| `Esc` | Pauza, zavření obchodu nebo nápovědy |
+| `Esc` | Pauza, zavření obchodu nebo nápovědy; v pauze přepínač jazyka EN/CZ |
 | `M` | Zapnutí/vypnutí zvuku |
 | `Enter` / `Space` v menu | Start hry |
 | `R` / `Enter` / `Space` po smrti | Nová hra |
@@ -348,7 +348,7 @@ Výběr typu nepřítele je vážený:
 - **Web Audio API** pro procedurální zvuky.
 - **Selenium + Firefox** byly použity při vývojovém testování; hra samotná žádné testovací závislosti nepotřebuje.
 
-Hra je v češtině. Kód používá anglické identifikátory, dokumentace a herní texty jsou české.
+Hra podporuje češtinu i angličtinu (výchozí je angličtina). Jazyk se přepíná v pauze otevřené klávesou `Esc`. Kód používá anglické identifikátory, dokumentace je česká.
 
 ### Struktura souborů
 

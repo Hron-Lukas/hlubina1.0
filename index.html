@@ -9,7 +9,7 @@
 </head>
 <body>
   <main id="game-shell">
-    <canvas id="game" aria-label="Herní plocha"></canvas>
+    <canvas id="game" data-i18n-aria="canvasAria" aria-label="Game area"></canvas>
 
     <div id="vignette"></div>
     <div id="damage-flash"></div>
@@ -20,13 +20,13 @@
           <div class="brand-mark">H<span>7</span></div>
           <div>
             <div class="brand-title">HLUBINA</div>
-            <div class="brand-sub">SEKTOR 7 // SMĚNA BEZ KONCE</div>
+            <div class="brand-sub" data-i18n="brandSub">SECTOR 7 // ENDLESS SHIFT</div>
           </div>
         </div>
 
         <div class="hud-stats">
           <div class="stat stat-hp">
-            <div class="stat-label">INTEGRITA</div>
+            <div class="stat-label" data-i18n="statIntegrity">INTEGRITY</div>
             <div class="bar-frame">
               <div id="hp-fill" class="bar-fill"></div>
               <div id="hp-ticks" class="bar-ticks"></div>
@@ -34,27 +34,27 @@
             <div id="hp-text" class="stat-value">100 / 100</div>
           </div>
           <div class="stat">
-            <div class="stat-label">ŠROT</div>
+            <div class="stat-label" data-i18n="statScrap">SCRAP</div>
             <div class="stat-value stat-money"><span class="coin-glyph"></span><span id="money-text">0</span></div>
           </div>
           <div class="stat">
-            <div class="stat-label">VLNA</div>
+            <div class="stat-label" data-i18n="statWave">WAVE</div>
             <div id="wave-text" class="stat-value">--</div>
           </div>
           <div class="stat">
-            <div class="stat-label">ELIMINACE</div>
+            <div class="stat-label" data-i18n="statKills">KILLS</div>
             <div id="kills-text" class="stat-value">0</div>
           </div>
         </div>
 
         <div class="hud-actions">
-          <button id="shop-btn" class="hud-button" type="button" title="Otevřít dílnu (B)">
+          <button id="shop-btn" class="hud-button" type="button" data-i18n-title="shopBtnTitle" title="Open workshop (B)">
             <span class="button-key">B</span>
-            <span>DÍLNA</span>
+            <span data-i18n="shopBtn">WORKSHOP</span>
           </button>
-          <button id="sound-btn" class="hud-button icon-button" type="button" title="Zvuk (M)" aria-label="Přepnout zvuk">♪</button>
-          <button id="help-btn" class="hud-button icon-button" type="button" title="Ovládání (H)" aria-label="Nápověda">?</button>
-          <button id="pause-btn" class="hud-button icon-button" type="button" title="Pauza (Esc)" aria-label="Pauza">Ⅱ</button>
+          <button id="sound-btn" class="hud-button icon-button" type="button" data-i18n-title="soundTitleOn" data-i18n-aria="soundAria" title="Sound on (M)" aria-label="Toggle sound">♪</button>
+          <button id="help-btn" class="hud-button icon-button" type="button" data-i18n-title="helpBtnTitle" data-i18n-aria="helpBtnAria" title="Controls (H)" aria-label="Help">?</button>
+          <button id="pause-btn" class="hud-button icon-button" type="button" data-i18n-title="pauseBtnTitle" data-i18n-aria="pauseBtnAria" title="Pause (Esc)" aria-label="Pause">Ⅱ</button>
         </div>
       </header>
 
@@ -62,10 +62,10 @@
       <div id="boss-bar" class="boss-bar hidden" aria-hidden="true" data-phase="1">
         <div class="boss-bar-head">
           <span class="boss-bar-label"><span class="pulse-dot red"></span> BOSS</span>
-          <span id="boss-phase" class="boss-bar-phase">FÁZE I</span>
+          <span id="boss-phase" class="boss-bar-phase">PHASE I</span>
           <span id="boss-hp-text" class="boss-bar-hp">0 / 0</span>
         </div>
-        <div id="boss-name" class="boss-bar-name">NEZNÁMÝ CÍL</div>
+        <div id="boss-name" class="boss-bar-name" data-i18n="unknownTarget">UNKNOWN TARGET</div>
         <div class="boss-bar-frame"><div id="boss-hp-fill" class="boss-bar-fill"></div></div>
       </div>
       <div id="toast-stack" class="toast-stack"></div>
@@ -73,19 +73,19 @@
       <div class="bottom-deck">
         <div class="deck-left">
           <div id="active-weapon" class="active-weapon">
-            <span class="active-label">AKTIVNÍ ZBRAŇ</span>
-            <span id="active-name" class="active-name">KRUMPÁČ</span>
+            <span class="active-label" data-i18n="activeWeapon">ACTIVE WEAPON</span>
+            <span id="active-name" class="active-name">PICKAXE</span>
             <span id="active-stats" class="active-stats">18 DMG // 0.45s</span>
           </div>
         </div>
 
-        <div id="hotbar" class="hotbar" aria-label="Inventář"></div>
+        <div id="hotbar" class="hotbar" data-i18n-aria="inventoryAria" aria-label="Inventory"></div>
 
         <div class="deck-right">
-          <div class="control-line"><kbd>WASD</kbd><span>pohyb</span></div>
-          <div class="control-line"><kbd>LMB</kbd><span>útok</span></div>
-          <div class="control-line"><kbd>E</kbd><span>sebrat</span></div>
-          <div class="control-line"><kbd>Q</kbd><span>odhodit</span></div>
+          <div class="control-line"><kbd>WASD</kbd><span data-i18n="controlMove">move</span></div>
+          <div class="control-line"><kbd>LMB</kbd><span data-i18n="controlAttack">attack</span></div>
+          <div class="control-line"><kbd>E</kbd><span data-i18n="controlPickup">pick up</span></div>
+          <div class="control-line"><kbd>Q</kbd><span data-i18n="controlDrop">drop</span></div>
         </div>
       </div>
 
@@ -96,23 +96,23 @@
     <section id="start-screen" class="overlay start-screen">
       <div class="menu-grid"></div>
       <div class="start-content">
-        <div class="eyebrow"><span class="pulse-dot"></span> AUTOMATIZACE SELHALA // 03:47</div>
+        <div class="eyebrow"><span class="pulse-dot"></span> <span data-i18n="startEyebrow">AUTOMATION FAILED // 03:47</span></div>
         <h1 class="game-title">HLUBINA<span class="title-7">7</span></h1>
-        <p class="game-subtitle">Továrna zmlkla. Ve skladech se něco probudilo.<br>Vezmi krumpáč a vydělej si na cestu ven.</p>
+        <p class="game-subtitle" data-i18n="startSubtitle">The factory went silent. Something woke up in the warehouses.<br>Take a pickaxe and earn your way out.</p>
 
         <div class="start-controls">
-          <div class="control-card"><kbd>WASD</kbd><kbd>↑↓←→</kbd><span>Pohyb po sektoru</span></div>
-          <div class="control-card"><kbd>MYŠ</kbd><span>Míření zbraně</span></div>
-          <div class="control-card"><kbd>LMB</kbd><kbd>SPACE</kbd><span>Útok</span></div>
-          <div class="control-card"><kbd>+ěščř</kbd><span>Volba slotu</span></div>
-          <div class="control-card"><kbd>E</kbd><span>Sebrat / vyměnit</span></div>
-          <div class="control-card"><kbd>Q</kbd><span>Odhodit zbraň</span></div>
-          <div class="control-card"><kbd>B</kbd><span>Dílna a vylepšení</span></div>
-          <div class="control-card"><kbd>ESC</kbd><span>Pauza</span></div>
+          <div class="control-card"><kbd>WASD</kbd><kbd>↑↓←→</kbd><span data-i18n="startMove">Move through the sector</span></div>
+          <div class="control-card"><kbd>MOUSE</kbd><span data-i18n="startAim">Weapon aiming</span></div>
+          <div class="control-card"><kbd>LMB</kbd><kbd>SPACE</kbd><span data-i18n="startAttack">Attack</span></div>
+          <div class="control-card"><kbd>+ěščř</kbd><span data-i18n="startSlot">Select slot</span></div>
+          <div class="control-card"><kbd>E</kbd><span data-i18n="startPickup">Pick up / swap</span></div>
+          <div class="control-card"><kbd>Q</kbd><span data-i18n="startDrop">Drop weapon</span></div>
+          <div class="control-card"><kbd>B</kbd><span data-i18n="startShop">Workshop &amp; upgrades</span></div>
+          <div class="control-card"><kbd>ESC</kbd><span data-i18n="startPause">Pause</span></div>
         </div>
 
         <div class="start-footer">
-          <button id="start-btn" class="primary-button" type="button"><span>ZAHÁJIT SMĚNU</span><span class="button-arrow">→</span></button>
+          <button id="start-btn" class="primary-button" type="button"><span data-i18n="startButton">START SHIFT</span><span class="button-arrow">→</span></button>
         </div>
       </div>
       <div class="menu-corner menu-corner-tl"></div>
@@ -123,20 +123,20 @@
       <div class="panel shop-panel">
         <header class="panel-header">
           <div>
-            <div class="eyebrow"><span class="pulse-dot amber"></span> DÍLNA // TERMINÁL 04</div>
-            <h2>VYLEPŠENÍ VÝBAVY</h2>
+            <div class="eyebrow"><span class="pulse-dot amber"></span> <span data-i18n="shopEyebrow">WORKSHOP // TERMINAL 04</span></div>
+            <h2 data-i18n="shopTitle">EQUIPMENT UPGRADES</h2>
           </div>
-          <div class="panel-currency"><span class="coin-glyph big"></span><span id="shop-money">0</span><span>ŠROTU</span></div>
-          <button id="shop-close" class="close-button" type="button" aria-label="Zavřít dílnu">×</button>
+          <div class="panel-currency"><span class="coin-glyph big"></span><span id="shop-money">0</span><span data-i18n="shopCurrency">SCRAP</span></div>
+          <button id="shop-close" class="close-button" type="button" data-i18n-aria="shopCloseAria" aria-label="Close workshop">×</button>
         </header>
 
         <div id="upgrade-grid" class="upgrade-grid"></div>
 
         <footer class="panel-footer">
-          <div class="panel-hint"><kbd>B</kbd> nebo <kbd>ESC</kbd> zavře dílnu. Hra je pozastavená.</div>
+          <div class="panel-hint" data-i18n="shopHint">B or ESC closes the workshop. The game is paused.</div>
           <button id="repair-btn" class="repair-button" type="button">
             <span class="repair-icon">+</span>
-            <span><strong>OPRAVIT INTEGRITU</strong><small id="repair-cost">0 ŠROTU</small></span>
+            <span><strong data-i18n="repairButton">REPAIR INTEGRITY</strong><small id="repair-cost">0 SCRAP</small></span>
           </button>
         </footer>
       </div>
@@ -144,14 +144,21 @@
 
     <section id="pause-screen" class="overlay pause-screen hidden" aria-hidden="true">
       <div class="panel small-panel">
-        <div class="eyebrow"><span class="pulse-dot amber"></span> SMĚNA POZASTAVENA</div>
-        <h2>PAUZA</h2>
-        <p class="panel-copy">Továrna počká. Tvůj šrot taky.</p>
+        <div class="eyebrow"><span class="pulse-dot amber"></span> <span data-i18n="pauseEyebrow">SHIFT PAUSED</span></div>
+        <h2 data-i18n="pauseTitle">PAUSED</h2>
+        <p class="panel-copy" data-i18n="pauseCopy">The factory waits. So does your scrap.</p>
         <div class="stack-buttons">
-          <button id="resume-btn" class="primary-button" type="button">POKRAČOVAT</button>
-          <button id="pause-shop-btn" class="secondary-button" type="button">DÍLNA <kbd>B</kbd></button>
-          <button id="pause-help-btn" class="secondary-button" type="button">OVLÁDÁNÍ <kbd>H</kbd></button>
-          <button id="restart-btn" class="ghost-button" type="button">NOVÁ SMĚNA</button>
+          <button id="resume-btn" class="primary-button" type="button" data-i18n="resume">RESUME</button>
+          <button id="pause-shop-btn" class="secondary-button" type="button"><span data-i18n="pauseShop">WORKSHOP</span> <kbd>B</kbd></button>
+          <button id="pause-help-btn" class="secondary-button" type="button"><span data-i18n="pauseHelp">CONTROLS</span> <kbd>H</kbd></button>
+          <button id="restart-btn" class="ghost-button" type="button" data-i18n="pauseRestart">NEW SHIFT</button>
+        </div>
+        <div class="language-switch">
+          <span class="language-label" data-i18n="languageLabel">LANGUAGE</span>
+          <div class="language-options">
+            <button class="language-button" data-lang="en" type="button" data-i18n="languageEn">EN</button>
+            <button class="language-button" data-lang="cs" type="button" data-i18n="languageCs">CZ</button>
+          </div>
         </div>
       </div>
     </section>
@@ -160,34 +167,34 @@
       <div class="panel help-panel">
         <header class="panel-header">
           <div>
-            <div class="eyebrow"><span class="pulse-dot"></span> PŘÍRUČKA OPERÁTORA</div>
-            <h2>OVLÁDÁNÍ</h2>
+            <div class="eyebrow"><span class="pulse-dot"></span> <span data-i18n="helpEyebrow">OPERATOR MANUAL</span></div>
+            <h2 data-i18n="helpTitle">CONTROLS</h2>
           </div>
-          <button id="help-close" class="close-button" type="button" aria-label="Zavřít nápovědu">×</button>
+          <button id="help-close" class="close-button" type="button" data-i18n-aria="helpCloseAria" aria-label="Close help">×</button>
         </header>
         <div class="help-grid">
-          <div><kbd>WASD</kbd><kbd>ŠIPKY</kbd><p>Pohyb postavy po sektoru.</p></div>
-          <div><kbd>MYŠ</kbd><p>Míření. Postava se otáčí za kurzorem.</p></div>
-          <div><kbd>LMB</kbd><kbd>SPACE</kbd><p>Útok aktivní zbraní. Podrž pro palbu.</p></div>
-          <div><kbd>+</kbd><kbd>ě</kbd><kbd>š</kbd><kbd>č</kbd><kbd>ř</kbd><p>Výběr slotu v inventáři.</p></div>
-          <div><kbd>E</kbd><p>Sebrání zbraně, případně výměna s aktivním slotem.</p></div>
-          <div><kbd>Q</kbd><p>Odhození zbraně z aktivního slotu.</p></div>
-          <div><kbd>PRAVÉ TL.</kbd><p>Kliknutí na slot odhodí zbraň.</p></div>
-          <div><kbd>B</kbd><p>Dílna: vylepšení poškození, odolnosti a dalších statů.</p></div>
-          <div><kbd>M</kbd><p>Zapnutí / vypnutí zvuku.</p></div>
-          <div><kbd>ESC</kbd><p>Pauza, zavření oken.</p></div>
+          <div><kbd>WASD</kbd><kbd>ARROWS</kbd><p data-i18n="helpMove">Move the character through the sector.</p></div>
+          <div><kbd>MOUSE</kbd><p data-i18n="helpAim">Aiming. The character turns toward the cursor.</p></div>
+          <div><kbd>LMB</kbd><kbd>SPACE</kbd><p data-i18n="helpAttack">Attack with the active weapon. Hold to keep firing.</p></div>
+          <div><kbd>+</kbd><kbd>ě</kbd><kbd>š</kbd><kbd>č</kbd><kbd>ř</kbd><p data-i18n="helpSlots">Select an inventory slot.</p></div>
+          <div><kbd>E</kbd><p data-i18n="helpPickup">Pick up a weapon or swap it with the active slot.</p></div>
+          <div><kbd>Q</kbd><p data-i18n="helpDrop">Drop the weapon from the active slot.</p></div>
+          <div><kbd>RMB</kbd><p data-i18n="helpRightClick">Right-click a slot to drop its weapon.</p></div>
+          <div><kbd>B</kbd><p data-i18n="helpShop">Workshop: upgrade damage, resistance and other stats.</p></div>
+          <div><kbd>M</kbd><p data-i18n="helpSound">Toggle sound on / off.</p></div>
+          <div><kbd>ESC</kbd><p data-i18n="helpPause">Pause, close windows.</p></div>
         </div>
-        <div class="help-tip"><strong>TIP:</strong> Zlaté a fialové zbraně mají výrazně vyšší poškození. Když je inventář plný, stůj u zbraně a stiskni <kbd>E</kbd> — vymění se za tu v aktivním slotu.<br><strong>BOSS:</strong> Každá pátá vlna končí bossem. Červené kruhy a čáry na zemi ukazují, kam udeří.</div>
+        <div class="help-tip" data-i18n="helpTip"><strong>TIP:</strong> Gold and purple weapons deal significantly more damage. When your inventory is full, stand next to a weapon and press <kbd>E</kbd> — it swaps with the one in the active slot.<br><strong>BOSS:</strong> Every fifth wave ends with a boss. Red circles and lines on the ground show where it will strike.</div>
       </div>
     </section>
 
     <section id="gameover-screen" class="overlay gameover-screen hidden" aria-hidden="true">
       <div class="panel small-panel gameover-panel">
-        <div class="eyebrow danger"><span class="pulse-dot red"></span> SIGNÁL OPERÁTORA ZTRACEN</div>
-        <h2>SMĚNA UKONČENA</h2>
-        <p class="panel-copy">Sektor 7 si tě pamatuje. Zkus to znovu.</p>
+        <div class="eyebrow danger"><span class="pulse-dot red"></span> <span data-i18n="gameoverEyebrow">OPERATOR SIGNAL LOST</span></div>
+        <h2 data-i18n="gameoverTitle">SHIFT TERMINATED</h2>
+        <p class="panel-copy" data-i18n="gameoverCopy">Sector 7 remembers you. Try again.</p>
         <div id="gameover-stats" class="gameover-stats"></div>
-        <button id="again-btn" class="primary-button" type="button">NOVÁ SMĚNA <span class="button-arrow">→</span></button>
+        <button id="again-btn" class="primary-button" type="button"><span data-i18n="againButton">NEW SHIFT</span> <span class="button-arrow">→</span></button>
       </div>
     </section>
   </main>
