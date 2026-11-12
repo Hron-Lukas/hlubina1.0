@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d");
 const TAU = Math.PI * 2;
 const WORLD = { w: 2800, h: 2100 };
 const TILE = 64;
+const SLOT_KEYS = ["+", "ě", "š", "č", "ř"];
 
 const ui = {
   hpFill: document.getElementById("hp-fill"),
@@ -758,13 +759,13 @@ function renderHotbar() {
     .map((weapon, index) => {
       if (!weapon) {
         return `<button class="slot empty ${index === selectedSlot ? "selected" : ""}" data-slot="${index}" type="button" title="Prázdný slot ${index + 1}">
-          <span class="slot-key">${index + 1}</span>
+          <span class="slot-key">${SLOT_KEYS[index]}</span>
           <span class="slot-empty-mark">—</span>
           <span class="slot-name">PRÁZDNÝ</span>
         </button>`;
       }
       return `<button class="slot ${index === selectedSlot ? "selected" : ""}" data-slot="${index}" type="button" style="--rarity:${weapon.rarityColor}" title="${weaponTitle(weapon).replace(/\n/g, "&#10;")}">
-        <span class="slot-key">${index + 1}</span>
+        <span class="slot-key">${SLOT_KEYS[index]}</span>
         <canvas width="64" height="64"></canvas>
         <span class="slot-rarity"></span>
         <span class="slot-name">${weapon.name}</span>
@@ -824,7 +825,8 @@ function upgradeCost(def) {
 
 function repairCost() {
   const missing = Math.max(0, player.maxHp - player.hp);
-  return Math.max(8, Math.ceil(missing * 0.65));
+  const waveMult = 1 + 0.12 * Math.max(0, waveState.number - 1);
+  return Math.ceil(Math.max(8, missing * 0.65) * waveMult);
 }
 
 function renderShop() {
@@ -1035,7 +1037,8 @@ window.addEventListener("keydown", (event) => {
     if (key === "m") { toggleSound(); return; }
     if (key === "q") { dropSelected(); return; }
     if (key === "e") { interact(); return; }
-    if (key >= "1" && key <= "5") { selectSlot(Number(key) - 1); return; }
+    const slotIndex = SLOT_KEYS.indexOf(key);
+    if (slotIndex !== -1) { selectSlot(slotIndex); return; }
   } else if (state === "paused") {
     if (key === "escape") resumeGame();
     if (key === "b") openShop();

@@ -27,7 +27,7 @@ Hru lze otevřít i přímo přes `index.html`, ale lokální HTTP server je dop
 | Myš | Míření |
 | Levé tlačítko myši | Útok aktivní zbraní, podržením pokračuje v palbě |
 | `Space` | Útok aktivní zbraní |
-| `1` až `5` | Výběr slotu inventáře |
+| `+`, `ě`, `š`, `č`, `ř` | Výběr slotu inventáře |
 | `E` | Sebrání zbraně, případně výměna s aktivním slotem |
 | `Q` | Odhození zbraně z aktivního slotu |
 | Pravé tlačítko na slotu | Odhození zbraně z daného slotu |
@@ -90,7 +90,7 @@ Zásah na blízko zasáhne všechny nepřátele v oblouku a dosahu zbraně. Stř
 Hráč má přesně pět slotů.
 
 - Startovní inventář obsahuje krumpáč v prvním slotu a čtyři prázdné sloty.
-- Aktivní slot se volí klávesami `1` až `5` nebo kliknutím na hotbar.
+- Aktivní slot se volí klávesami `+`, `ě`, `š`, `č`, `ř` nebo kliknutím na hotbar.
 - Pokud je v inventáři volný slot, zbraň ze země se automaticky sebere při přiblížení na `30 px`.
 - Pokud je inventář plný, zobrazí se výzva k výměně. Klávesa `E` vymění zbraň na zemi za zbraň v aktivním slotu.
 - Vyměněná stará zbraň vypadne u hráče s krátkým zpožděním `1,1 s`, aby nedošlo k okamžitému opětovnému sebrání.
@@ -220,10 +220,10 @@ round(základní cena × růst^aktuální úroveň)
 Oprava integrity stojí:
 
 ```text
-max(8; ceil(chybějící HP × 0,65))
+ceil(max(8; chybějící HP × 0,65) × (1 + 0,12 × (číslo vlny - 1)))
 ```
 
-Oprava vždy doplní integritu na maximum. Vylepšení jsou trvalá do konce aktuální hry.
+Cena opravy tedy s každou další vlnou roste o `12 %`. Oprava vždy doplní integritu na maximum. Vylepšení jsou trvalá do konce aktuální hry.
 
 ### Smrt a konec hry
 
